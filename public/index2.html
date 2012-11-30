@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+ <html>
+ <head>
+     <script type="text/javascript" 
+                src="http://mbostock.github.com/d3/d3.js"
+     ></script>
+     <style type="text/css">
+         p {
+             font-size: 20px;
+             color: orangered;
+         }
+     </style>
+ </head>
+ <body>
+     <div id="example3">
+        <p>Already existing paragraph 1</p>
+        <p>Already existing paragraph 2</p>
+     </div>
+     <script type="text/javascript">
+         pdata = [10,12,6,8,15];
+ 
+         selectDIV = d3.select("#example3");
+ 
+        selectDIV.selectAll("p")
+             .data(pdata, function(d){return d;})
+             .enter()
+             .append("p")
+             .text(function(d){return d;});
+     </script>
+	 <div id="svgpathSVGdata"></div>
+
+    <script type="text/javascript">
+        var divElem = d3.select("#svgpathSVGdata");
+
+        var svgcanvas = divElem.append("svg:svg")
+            .attr("width", 200)
+            .attr("height", 200);
+
+        // (1) Specifying path data the SVG way
+        svgcanvas.append("svg:path")
+            .attr("d","M 0 60 L 50 110 L 90 70 L 140 100")
+            .style("stroke-width", 2)
+            .style("stroke", "steelblue")
+            .style("fill", "none");
+    </script>
+ </body>
+ </html>
