@@ -1,0 +1,53 @@
+    <!DOCTYPE html>
+    <html>
+    <head>
+    <title>Bootstrap 101 Template</title>
+    <!-- Bootstrap -->
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet" media="screen">
+    <script src="bootstrap/js/jquery-latest.js"></script>
+    </head>
+    <body>
+
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span2">
+            <!--Sidebar content-->
+                <ul id="div1">Loading...</ul>
+            </div>
+            <div class="span10">
+            <!--Body content-->
+                <p>Main content</p>
+            </div>
+        </div>
+    </div>
+    
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+     <script type="text/javascript">        
+   function callNode(){
+           $.ajax({
+                cache: false,
+                type: 'GET',
+                url: 'http://localhost:3001/posts',
+                crossDomain: true,    
+                dataType: 'text',
+                success: function(responseData, textStatus, jqXHR) {
+                    if ('OK' == responseData){
+                        callNode();
+                        return false;
+                    }
+                    $("#div1").append('<li>' + responseData + '</li>');
+                    callNode();
+                },
+                error: function (responseData, textStatus, errorThrown) {
+                    alert('POST failed.');
+                }
+            });     
+   }                                 
+ $(document).ready(function(){      
+         callNode();    
+ });                          
+ </script>    
+    </body>
+    </html>

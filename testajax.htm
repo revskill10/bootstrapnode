@@ -1,0 +1,37 @@
+<html>                                                                  
+ <head>                                                                  
+ <script src="http://code.jquery.com/jquery-latest.js"></script>  
+                                                            
+ </head>                                                                 
+ <body>                                                                  
+   <!-- we will add our HTML content here -->       
+   <div id="div1"><h2>Let jQuery AJAX Change This Text</h2></div>   
+   <button>Get External Content</button>    
+
+   <script type="text/javascript">        
+   function callNode(){
+           $.ajax({
+                cache: false,
+                type: 'GET',
+                url: 'http://localhost:3001/posts',
+                crossDomain: true,    
+                dataType: 'text',
+                success: function(responseData, textStatus, jqXHR) {
+                    if ('OK' == responseData){
+                        callNode();
+                        return false;
+                    }
+                    $("#div1").html(responseData);
+                    callNode();
+                },
+                error: function (responseData, textStatus, errorThrown) {
+                    alert('POST failed.');
+                }
+            });     
+   }                                 
+ $(document).ready(function(){      
+         callNode();    
+ });                          
+ </script>                              
+ </body>                                                                 
+ </html>
